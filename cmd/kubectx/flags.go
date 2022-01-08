@@ -36,8 +36,14 @@ func parseArgs(args []string) Op {
 			return UnknownOp{Args: args}
 		}
 
+	// TODO handle -d
+	// TODO handle --current
+	// TODO handle -c/--unset
+
 		return SwitchOp{Target: args[0]}
 	}
+
+	// TODO Handle too many arguments
 
 	return UnknownOp{}
 }
