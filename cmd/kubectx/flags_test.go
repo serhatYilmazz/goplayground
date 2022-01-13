@@ -45,6 +45,11 @@ func Test_parseArgs(t *testing.T) {
 			args: []string{"-x"},
 			want: UnknownOp{Args: []string{"-x"}},
 		},
+		{
+			name: "unsupported (unknown option) with multiple parameter",
+			args: []string{"-x", "-d"},
+			want: UnknownOp{Args: []string{"-x", "-d"}},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -45,5 +45,5 @@ func parseArgs(args []string) Op {
 
 	// TODO Handle too many arguments
 
-	return UnknownOp{}
+	return UnknownOp{Args: args}
 }
