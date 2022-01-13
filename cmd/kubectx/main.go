@@ -20,7 +20,7 @@ func main() {
 	case HelpOp:
 		printHelp(os.Stdout)
 	case ListOp:
-		panic("Not implemented")
+		printListContexts(os.Stdout)
 	case SwitchOp:
 		panic("Not implemented")
 	default:
