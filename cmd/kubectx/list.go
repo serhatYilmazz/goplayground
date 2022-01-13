@@ -1,7 +1,9 @@
 package main
 
 import (
+	"facette.io/natsort"
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v2"
 	"io"
@@ -19,6 +21,7 @@ type Context struct {
 }
 
 func printListContexts(writer io.Writer) error {
+	// TODO extract printing and sorting into a function that is testable
 	// parse kubeconfig --> []context_names, current_context_name
 	cfgPath, err := kubeconfigPath()
 	if err != nil {
@@ -29,11 +32,20 @@ func printListContexts(writer io.Writer) error {
 		return errors.Wrap(err, "failed to read kubeconfig file")
 	}
 
-	fmt.Fprintf(writer, "%#v\n", cfg)
+	ctxs := make([]string, 0, len(cfg.Contexts))
+	for _, c := range cfg.Contexts {
+		ctxs = append(ctxs, c.Name)
+	}
 
-	// print each context
-	// - natural sort
-	// - highlight current
+	natsort.Sort(ctxs)
+
+	for _, c := range ctxs {
+		out := c
+		if out == cfg.CurrentContext {
+			out = color.New(color.Bold, color.FgHiYellow).Sprintf(c)
+		}
+		fmt.Println(out)
+	}
 
 	return nil
 }

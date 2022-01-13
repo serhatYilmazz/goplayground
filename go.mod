@@ -5,6 +5,7 @@ go 1.17
 require github.com/google/go-cmp v0.5.6
 
 require (
+	facette.io/natsort v0.0.0-20181210072756-2cd4dd1e2dcb // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
