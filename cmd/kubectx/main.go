@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"os"
 	"strings"
 )
@@ -12,9 +13,12 @@ func main() {
 
 	switch v:= op.(type) {
 	case UnknownOp:
-		fmt.Printf("error: Unsupported Operation: %s\n", strings.Join(v.Args, " "))
+		fmt.Printf("%s: Unsupported Operation: %s\n", color.RedString("error"), strings.Join(v.Args, " "))
 		//TODO print --help string
+		printHelp(os.Stdout)
 		os.Exit(1)
+	case HelpOp:
+		printHelp(os.Stdout)
 	case ListOp:
 		panic("Not implemented")
 	case SwitchOp:
